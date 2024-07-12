@@ -1,19 +1,25 @@
+export DATABASE_URL=/Users/aa/private/script
+
 go mod tidy
 go build
 ./script render
 cp main.go save_main
 cp wasm/main.go .
 GOOS=js GOARCH=wasm go build -ldflags="-s -w -X main.useLive=true" -o assets/other/json.wasm 
-mv save_main main.go
-export DATABASE_URL=/Users/aa/private/script
+cp wasm/script.go main.go
+GOOS=js GOARCH=wasm go build -ldflags="-s -w -X main.useLive=true" -o assets/other/fly.wasm 
 if [ $? -eq 0 ]; then
+    mv save_main main.go
     cd assets/other
     rm json.wasm.gz
+    rm fly.wasm.gz
     gzip -f json.wasm
+    gzip -f fly.wasm
     cd ../..
     tailwindcss -i assets/css/tail.components.css -o assets/css/tail.min.css --minify
     uuid=$(uuidgen); go build -ldflags="-X main.buildTag=$uuid"
     echo 3
     ./script run 3000
+else    
+    mv save_main main.go
 fi
-    
