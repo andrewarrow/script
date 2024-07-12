@@ -106,13 +106,4 @@ func handleStripeShow(c *router.Context, guid string) {
 	c.SendContentInLayout("stripe.html", send, 200)
 }
 
-var scriptTemplate = `
-(function(guid) { 
-  importScripts('https://script.fly.dev/assets/javascript/wasm_exec.js'); 
-	const go = new Go(); 
-	WebAssembly.instantiateStreaming(fetch("https://script.fly.dev/assets/other/fly.wasm.gz"), go.importObject).then((result) => { 
-	  go.run(result.instance); 
-		ScriptFlyDevStripe(guid); 
-	})
-	})('%s');
-`
+var scriptTemplate = `(function(guid) { const script = document.createElement('script'); script.src = 'https://script.andrewarrow.dev/assets/javascript/wasm_exec.js'; script.onload = () => { const go = new Go(); WebAssembly.instantiateStreaming(fetch("https://script.andrewarrow.dev/assets/other/fly.wasm.gz"), go.importObject).then((result) => { go.run(result.instance); ScriptFlyDevStripe(guid); }); }; document.head.appendChild(script);})('%s')`
