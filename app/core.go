@@ -101,7 +101,7 @@ func handleStripeShow(c *router.Context, guid string) {
 	send := map[string]any{}
 	item := c.One("stripe", "where guid=$1", guid)
 	send["item"] = item
-	script := fmt.Sprintf(scriptTemplate, guid)
+	script := fmt.Sprintf(scriptTemplate, guid, guid)
 	send["script"] = fmt.Sprintf(`<script type="text/javascript">%s</script>`, script)
 	c.SendContentInLayout("stripe.html", send, 200)
 }
@@ -126,4 +126,4 @@ func handleWasm(c *router.Context) {
 	c.Writer.Write([]byte(matchFile))
 }
 
-var scriptTemplate = `(function(guid) { const script = document.createElement('script'); script.src = "https://script.andrewarrow.dev/assets/javascript/wasm_exec.js"; script.onload = () => { const go = new Go(); WebAssembly.instantiateStreaming(fetch("https://script.andrewarrow.dev/core/wasm"), go.importObject).then((result) => { go.run(result.instance); WasmReady(""); }); }; document.head.appendChild(script);})('%s')`
+var scriptTemplate = `(function(guid) { const script = document.createElement('script'); script.src = "https://script.andrewarrow.dev/assets/javascript/wasm_exec.js"; script.onload = () => { const go = new Go(); WebAssembly.instantiateStreaming(fetch("https://script.andrewarrow.dev/core/wasm"), go.importObject).then((result) => { go.run(result.instance); WasmReady("%s"); }); }; document.head.appendChild(script);})('%s')`
