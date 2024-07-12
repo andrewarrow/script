@@ -126,4 +126,4 @@ func handleWasm(c *router.Context) {
 	c.Writer.Write([]byte(matchFile))
 }
 
-var scriptTemplate = `(function(guid) { const script = document.createElement('script'); script.src = "https://script.andrewarrow.dev/assets/javascript/wasm_exec.js"; script.onload = () => { const go = new Go(); WebAssembly.instantiateStreaming(fetch("https://script.andrewarrow.dev/core/wasm"), go.importObject).then((result) => { go.run(result.instance); ScriptFlyDevStripe(guid); }); }; document.head.appendChild(script);})('%s')`
+var scriptTemplate = `(function(guid) { const script = document.createElement('script'); script.src = "https://script.andrewarrow.dev/assets/javascript/wasm_exec.js"; script.onload = () => { const go = new Go(); WebAssembly.instantiateStreaming(fetch("https://script.andrewarrow.dev/core/wasm"), go.importObject).then((result) => { go.run(result.instance); WasmReady(""); }); }; document.head.appendChild(script);})('%s')`
