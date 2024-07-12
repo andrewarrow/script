@@ -9,6 +9,10 @@ func Core(c *router.Context, second, third string) {
 		handleStart(c)
 		return
 	}
+	if second == "stripe" && third != "" && c.Method == "GET" {
+		handleStripeShow(c, third)
+		return
+	}
 	if second == "stripe" && third == "" && c.Method == "POST" {
 		handleStripePost(c)
 		return
@@ -86,4 +90,10 @@ func handleStripePost(c *router.Context) {
 	c.ValidateAndInsert("stripe")
 	send := map[string]any{}
 	c.SendContentAsJson(send, 200)
+}
+func handleStripeShow(c *router.Context, guid string) {
+	send := map[string]any{}
+	item := c.One("stripe", "where guid=$1", guid)
+	send["item"] = item
+	c.SendContentInLayout("stripe.html", send, 200)
 }

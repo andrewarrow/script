@@ -18,5 +18,6 @@ div p-0
         div 
           {{ range $i, $item := .items }}
             div font-mono
-              {{ add $i 1 }}. {{ $item.dev_publishable_key }}   {{ $item.dev_secret_key }}
+              a href=/core/stripe/{{$item.guid}}
+                {{ add $i 1 }}.  {{ $item.dev_publishable_key }}
           {{ end }}
