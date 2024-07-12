@@ -5,5 +5,5 @@ div p-0
       div
         div text-white 
           {{.item.dev_publishable_key}}
-        div font-mono text-sm
+        div mt-3 bg-purple-900 text-white rounded-lg p-3 font-mono text-sm
           {{.script}}
