@@ -7,12 +7,14 @@ div p-0
           script.fly.dev
         div mt-9
           div mt-3 text-center
-            span
+            div
               Already have account?
-            a btn btn-sm btn-primary href=/core/login
-              Login
+            div
+              a btn btn-sm btn-primary href=/core/login
+                Login
           div mt-3 
-            span
+            div
               Need an account?
-            a btn btn-sm btn-secondary href=/core/register
-              Register
+            div
+              a btn btn-sm btn-secondary href=/core/register
+                Register
