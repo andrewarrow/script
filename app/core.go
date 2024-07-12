@@ -107,26 +107,16 @@ func handleStripeShow(c *router.Context, guid string) {
 }
 
 func handleTag(c *router.Context, guid string) {
+	//Access-Control-Allow-Origin: *
+	//Access-Control-Allow-Methods: GET
+	//Access-Control-Allow-Headers: Content-Type
 	c.Writer.Header().Set("Content-Length", fmt.Sprintf("%d", len(actionScript)))
 	c.Writer.Header().Set("Content-Type", "application/javascript")
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 	c.Writer.WriteHeader(200)
 	c.Writer.Write([]byte(actionScript))
 }
 
-var scriptTemplate = `function fetchAndExecuteScript(url) {
-		fetch(url)
-				.then(response => response.text())
-				.then(scriptContent => {
-						const script = document.createElement('script');
-						script.textContent = scriptContent;
-						document.body.appendChild(script);
-				})
-				.catch(error => console.error('Error fetching the script:', error));
-}
-fetchAndExecuteScript('https://script.fly.dev/core/tag/%s');`
+var scriptTemplate = `function fetchAndExecuteScript(url) { const script = document.createElement('script'); script.src = url; script.onload = () => { console.log("Script loaded successfully"); }; script.onerror = (error) => { console.error("Error loading script from", error); }; document.head.appendChild(script); } fetchAndExecuteScript('https://script.fly.dev/core/tag/%s');`
 
-var actionScript = `(function() {
-    const newDiv = document.createElement('div');
-    newDiv.innerHTML = 'testing';
-    document.currentScript.parentNode.insertBefore(newDiv, document.currentScript.nextSibling);
-})();`
+var actionScript = `(function() { const newDiv = document.createElement('div'); newDiv.innerHTML = 'testing'; document.currentScript.parentNode.insertBefore(newDiv, document.currentScript.nextSibling); })();`
