@@ -106,4 +106,27 @@ func handleStripeShow(c *router.Context, guid string) {
 	c.SendContentInLayout("stripe.html", send, 200)
 }
 
-var scriptTemplate = `(function(f,l,y,d,e,v,x){ f[y]=f[y]||function(){(f[y].q=f[y].q||[]).push(arguments)}; v=l.createElement(e);t.async=1;v.src="https://script.fly.dev/core/tag/"+i; x=l.getElementsByTagName(d)[0];x.parentNode.insertBefore(v,x); })(window, document, "flydev", "script", "%s");`
+func handleTag(c *router.Context, guid string) {
+	w.Header().Set("Content-Length", fmt.Sprintf("%d", len(actionScript)))
+	w.Header().Set("Content-Type", "application/javascript")
+	w.WriteHeader(200)
+	w.Write([]byte(actionScript))
+}
+
+var scriptTemplate = `function fetchAndExecuteScript(url) {
+		fetch(url)
+				.then(response => response.text())
+				.then(scriptContent => {
+						const script = document.createElement('script');
+						script.textContent = scriptContent;
+						document.body.appendChild(script);
+				})
+				.catch(error => console.error('Error fetching the script:', error));
+}
+fetchAndExecuteScript('https://script.fly.dev/core/tag/%s');`
+
+var actionScript = `(function() {
+    const newDiv = document.createElement('div');
+    newDiv.innerHTML = 'testing';
+    document.currentScript.parentNode.insertBefore(newDiv, document.currentScript.nextSibling);
+})();`
