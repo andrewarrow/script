@@ -107,12 +107,8 @@ func handleStripeShow(c *router.Context, guid string) {
 }
 
 func handleTag(c *router.Context, guid string) {
-	//Access-Control-Allow-Origin: *
-	//Access-Control-Allow-Methods: GET
-	//Access-Control-Allow-Headers: Content-Type
 	c.Writer.Header().Set("Content-Length", fmt.Sprintf("%d", len(actionScript)))
 	c.Writer.Header().Set("Content-Type", "application/javascript")
-	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 	c.Writer.WriteHeader(200)
 	c.Writer.Write([]byte(actionScript))
 }
