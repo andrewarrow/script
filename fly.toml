@@ -11,6 +11,7 @@ primary_region = 'lax'
 [env]
   PORT = '8080'
   discovery = 'map[type:single-node]'
+  DATABASE_URL='/Users/aa/private/script'
 
 [[mounts]]
   source = 'data'

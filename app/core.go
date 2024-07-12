@@ -9,6 +9,10 @@ func Core(c *router.Context, second, third string) {
 		handleStart(c)
 		return
 	}
+	if second == "stripe" && third == "" && c.Method == "POST" {
+		handleStripePost(c)
+		return
+	}
 	if second == "about-us" && third == "" && c.Method == "GET" {
 		handleAboutUs(c)
 		return
@@ -73,4 +77,8 @@ func handleAboutUs(c *router.Context) {
 func handleStart(c *router.Context) {
 	send := map[string]any{}
 	c.SendContentInLayout("start.html", send, 200)
+}
+func handleStripePost(c *router.Context) {
+	send := map[string]any{}
+	c.SendContentAsJson(send, 200)
 }

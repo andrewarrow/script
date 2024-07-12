@@ -12,4 +12,4 @@ div p-0
         div
           input type=text input input-primary id=dev_secret_key
         div
-          input type=submit value=Save btn btn-primary btn-sm mt-3
+          input id=save type=submit value=Save btn btn-primary btn-sm mt-3

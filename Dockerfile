@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 COPY go.mod go.sum ./
 RUN go mod download && go mod verify
 COPY . .
-ENV DATABASE_URL=gnr
+ENV DATABASE_URL=/Users/aa/private/script
 RUN go build -v -o /usr/src/app/run-app .
 
 FROM debian:bookworm
