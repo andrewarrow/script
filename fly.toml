@@ -1,0 +1,30 @@
+# fly.toml app configuration file generated for script on 2024-07-11T18:05:36-07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'script'
+primary_region = 'lax'
+
+[build]
+
+[env]
+  PORT = '8080'
+  discovery = 'map[type:single-node]'
+
+[[mounts]]
+  source = 'data'
+  destination = '/Users/aa'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '2gb'
+  cpu_kind = 'shared'
+  cpus = 1
