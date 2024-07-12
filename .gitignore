@@ -3,6 +3,7 @@ script
 node_modules
 package*.json
 json.wasm.gz
+fly.wasm.gz
 .DS_Store
 views
 tail.min.css
