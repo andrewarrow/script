@@ -120,7 +120,7 @@ func handleStripeShow(c *router.Context, guid string) {
 func handleWasm(c *router.Context) {
 	host := c.Request.Host
 	fmt.Println("host", host)
-	if host != "script.andrewarrow.dev" {
+	if host != "script.andrewarrow.dev" && host != "localhost:3000" {
 		c.SendContentAsJson("wrong-host", 422)
 		return
 	}
