@@ -15,8 +15,8 @@ func Core(c *router.Context, second, third string) {
 		handleStripeShow(c, third)
 		return
 	}
-	if second == "tag" && third != "" && c.Method == "GET" {
-		//handleTag(c, third)
+	if second == "wasm" && third == "" && c.Method == "GET" {
+		handleWasm(c)
 		return
 	}
 	if second == "stripe" && third == "" && c.Method == "POST" {
@@ -105,5 +105,19 @@ func handleStripeShow(c *router.Context, guid string) {
 	send["script"] = fmt.Sprintf(`<script type="text/javascript">%s</script>`, script)
 	c.SendContentInLayout("stripe.html", send, 200)
 }
+func handleWasm(c *router.Context) {
+	var contentEncoding = "gzip"
+	var contentType = "application/wasm"
+	c.Writer.Header().Set("Content-Type", contentType)
+	c.Writer.Header().Set("Connection", "keep-alive")
+	c.Writer.Header().Set("Content-Encoding", contentEncoding)
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+	c.Writer.Header().Set("Access-Control-Allow-Methods", "GET")
+	c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
 
-var scriptTemplate = `(function(guid) { const script = document.createElement('script'); script.src = 'https://script.andrewarrow.dev/assets/javascript/wasm_exec.js'; script.onload = () => { const go = new Go(); WebAssembly.instantiateStreaming(fetch("https://script.andrewarrow.dev/assets/other/fly.wasm.gz"), go.importObject).then((result) => { go.run(result.instance); ScriptFlyDevStripe(guid); }); }; document.head.appendChild(script);})('%s')`
+	matchFile, _ := router.EmbeddedAssets.ReadFile("assets/others/fly.wasm.gz")
+	c.Writer.Header().Set("Content-Length", fmt.Sprintf("%d", len(matchFile)))
+	c.Writer.Write([]byte(matchFile))
+}
+
+var scriptTemplate = `(function(guid) { const script = document.createElement('script'); script.src = "https://script.andrewarrow.dev/assets/javascript/wasm_exec.js"; script.onload = () => { const go = new Go(); WebAssembly.instantiateStreaming(fetch("https://script.andrewarrow.dev/core/wasm"), go.importObject).then((result) => { go.run(result.instance); ScriptFlyDevStripe(guid); }); }; document.head.appendChild(script);})('%s')`
