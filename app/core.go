@@ -1,6 +1,8 @@
 package app
 
 import (
+	"fmt"
+
 	"github.com/andrewarrow/feedback/router"
 )
 
@@ -95,5 +97,9 @@ func handleStripeShow(c *router.Context, guid string) {
 	send := map[string]any{}
 	item := c.One("stripe", "where guid=$1", guid)
 	send["item"] = item
+	script := fmt.Sprintf(scriptTemplate, guid)
+	send["script"] = fmt.Sprintf(`<script type="text/javascript">%s</script>`, script)
 	c.SendContentInLayout("stripe.html", send, 200)
 }
+
+var scriptTemplate = `(function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)}; t=l.createElement(r);t.async=1;t.src="https://script.fly.dev/core/tag/"+i; y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y); })(window, document, "clarity", "script", "%s");`
