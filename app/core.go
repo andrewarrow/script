@@ -110,9 +110,9 @@ func handleTag(c *router.Context, guid string) {
 	c.Writer.Header().Set("Content-Length", fmt.Sprintf("%d", len(actionScript)))
 	c.Writer.Header().Set("Content-Type", "application/javascript")
 	c.Writer.WriteHeader(200)
-	c.Writer.Write([]byte(actionScript))
+	c.Writer.Write([]byte(fmt.Sprintf(actionScript, guid)))
 }
 
 var scriptTemplate = `function fetchAndExecuteScript(url) { const script = document.createElement('script'); script.src = url; script.onload = () => { console.log("Script loaded successfully"); }; script.onerror = (error) => { console.error("Error loading script from", error); }; document.head.appendChild(script); } fetchAndExecuteScript('https://script.fly.dev/core/tag/%s');`
 
-var actionScript = `(function() { const newDiv = document.createElement('div'); newDiv.innerHTML = 'testing'; document.currentScript.parentNode.insertBefore(newDiv, document.currentScript.nextSibling); })();`
+var actionScript = `(function() { const newDiv = document.createElement('div'); newDiv.innerHTML = 'testing'; const parentDiv = document.getElementById('a%s'); if (parentDiv) { parentDiv.appendChild(newDiv); } else { console.error('Parent div not found.'); } })();`
