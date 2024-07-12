@@ -15,6 +15,10 @@ func Core(c *router.Context, second, third string) {
 		handleStripeShow(c, third)
 		return
 	}
+	if second == "tag" && third != "" && c.Method == "GET" {
+		handleTag(c, third)
+		return
+	}
 	if second == "stripe" && third == "" && c.Method == "POST" {
 		handleStripePost(c)
 		return
