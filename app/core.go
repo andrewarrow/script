@@ -102,4 +102,4 @@ func handleStripeShow(c *router.Context, guid string) {
 	c.SendContentInLayout("stripe.html", send, 200)
 }
 
-var scriptTemplate = `(function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)}; t=l.createElement(r);t.async=1;t.src="https://script.fly.dev/core/tag/"+i; y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y); })(window, document, "clarity", "script", "%s");`
+var scriptTemplate = `(function(f,l,y,d,e,v,x){ f[y]=f[y]||function(){(f[y].q=f[y].q||[]).push(arguments)}; v=l.createElement(e);t.async=1;v.src="https://script.fly.dev/core/tag/"+i; x=l.getElementsByTagName(d)[0];x.parentNode.insertBefore(v,x); })(window, document, "flydev", "script", "%s");`
