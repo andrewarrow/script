@@ -82,6 +82,7 @@ func handleStart(c *router.Context) {
 }
 func handleStripePost(c *router.Context) {
 	c.ReadJsonBodyIntoParams()
+	c.Params["user_id"] = c.User["id"]
 	c.ValidateAndInsert("stripe")
 	send := map[string]any{}
 	c.SendContentAsJson(send, 200)

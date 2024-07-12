@@ -24,7 +24,7 @@ func RegisterEvents() {
 			return ""
 		}
 		a.After = func(content string) {
-			//Global.Location.Set("href", "/core/start")
+			Global.Location.Set("href", "/core/start")
 		}
 		Global.AddAutoForm(a)
 	} else if Global.Start == "login.html" {
