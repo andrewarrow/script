@@ -44,10 +44,22 @@ func Core(c *router.Context, second, third string) {
 		return
 	}
 	if second == "register" && third == "" && c.Method == "POST" {
+		host := c.Request.Host
+		fmt.Println("host", host)
+		if host == "script.andrewarrow.dev" {
+			c.SendContentAsJson("wrong-host", 422)
+			return
+		}
 		router.HandleCreateUserAutoForm(c, "")
 		return
 	}
 	if second == "login" && third == "" && c.Method == "POST" {
+		host := c.Request.Host
+		fmt.Println("host", host)
+		if host == "script.andrewarrow.dev" {
+			c.SendContentAsJson("wrong-host", 422)
+			return
+		}
 		router.HandleCreateSessionAutoForm(c)
 		return
 	}
