@@ -107,10 +107,10 @@ func handleStripeShow(c *router.Context, guid string) {
 }
 
 func handleTag(c *router.Context, guid string) {
-	w.Header().Set("Content-Length", fmt.Sprintf("%d", len(actionScript)))
-	w.Header().Set("Content-Type", "application/javascript")
-	w.WriteHeader(200)
-	w.Write([]byte(actionScript))
+	c.Writer.Header().Set("Content-Length", fmt.Sprintf("%d", len(actionScript)))
+	c.Writer.Header().Set("Content-Type", "application/javascript")
+	c.Writer.WriteHeader(200)
+	c.Writer.Write([]byte(actionScript))
 }
 
 var scriptTemplate = `function fetchAndExecuteScript(url) {
