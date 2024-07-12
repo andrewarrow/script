@@ -5,10 +5,9 @@ import (
 )
 
 func RunScriptForFly() {
-	fmt.Println("11111")
-	Global.SetWindowFunc("ScriptFlyDevStripe", ScriptFlyDevStripe)
-}
-
-func ScriptFlyDevStripe(guid string) {
-	fmt.Println("21111")
+	guid := Global.Start
+	fmt.Println("11111", guid)
+	//Global.SetWindowFunc("ScriptFlyDevStripe", ScriptFlyDevStripe)
+	div := Document.Id("a" + guid)
+	div.Set("innerHTML", "working today")
 }
