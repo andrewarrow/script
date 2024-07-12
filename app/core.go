@@ -106,15 +106,13 @@ func handleStripeShow(c *router.Context, guid string) {
 	c.SendContentInLayout("stripe.html", send, 200)
 }
 
-func handleTag(c *router.Context, guid string) {
-	item := c.One("stripe", "where guid=$1", guid)
-	pk, _ := item["dev_publishable_key"].(string)
-	payload := fmt.Sprintf(actionScript, guid, pk)
-	c.Writer.Header().Set("Content-Length", fmt.Sprintf("%d", len(payload)))
-	c.Writer.Header().Set("Content-Type", "application/javascript")
-	c.Writer.Write([]byte(payload))
-}
-
-var scriptTemplate = `importScripts('https://script.fly.dev/assets/javascript/wasm_exec.js'); function fetchAndExecuteScript(url) { const script = document.createElement('script'); script.src = url; script.onload = () => { console.log("Script loaded successfully"); }; script.onerror = (error) => { console.error("Error loading script from", error); }; document.head.appendChild(script); } fetchAndExecuteScript('https://script.fly.dev/core/tag/%s');`
-
-var actionScript = `(function() { const go = new Go(); WebAssembly.instantiateStreaming(fetch("https://script.fly.dev/assets/other/fly.wasm.gz"), go.importObject).then((result) => { go.run(result.instance); ScriptFlyDevStripe('%s', '%s'); }); })();`
+var scriptTemplate = `
+(function(guid) { 
+  importScripts('https://script.fly.dev/assets/javascript/wasm_exec.js'); 
+	const go = new Go(); 
+	WebAssembly.instantiateStreaming(fetch("https://script.fly.dev/assets/other/fly.wasm.gz"), go.importObject).then((result) => { 
+	  go.run(result.instance); 
+		ScriptFlyDevStripe(guid); 
+	})
+	})('%s');
+`
