@@ -1,7 +1,7 @@
 div p-0 
   {{ template "navbar" . }}
   div flex flex-col md:flex-row space-x-9 items-start justify-center
-    div w-1/2 flex justify-center
+    div md:w-1/2 flex justify-center
       div
         div 
           form id=stripe text-center text-2xl space-y-3 mt-3
@@ -16,4 +16,7 @@ div p-0
             div
               input id=save type=submit value=Save btn btn-primary btn-sm mt-3
         div 
-          {{ .items }}
+          {{ range $i, $item := .items }}
+            div font-mono
+              {{ add $i 1 }}. {{ $item.dev_publishable_key }}   {{ $item.dev_secret_key }}
+          {{ end }}
