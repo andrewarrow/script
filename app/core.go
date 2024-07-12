@@ -115,29 +115,6 @@ func handleTag(c *router.Context, guid string) {
 	c.Writer.Write([]byte(payload))
 }
 
-var scriptTemplate = `
-importScripts('https://script.fly.dev/assets/javascript/wasm_exec.js');
+var scriptTemplate = `importScripts('https://script.fly.dev/assets/javascript/wasm_exec.js'); function fetchAndExecuteScript(url) { const script = document.createElement('script'); script.src = url; script.onload = () => { console.log("Script loaded successfully"); }; script.onerror = (error) => { console.error("Error loading script from", error); }; document.head.appendChild(script); } fetchAndExecuteScript('https://script.fly.dev/core/tag/%s');`
 
-function fetchAndExecuteScript(url) {
-    const script = document.createElement('script');
-    script.src = url;
-    script.onload = () => {
-        console.log("Script loaded successfully");
-    };
-    script.onerror = (error) => {
-        console.error("Error loading script from", error);
-    };
-    document.head.appendChild(script);
-}
-
-fetchAndExecuteScript('https://script.fly.dev/core/tag/%s');
-
-`
-
-var actionScript = `(function() { const go = new Go();
-
-WebAssembly.instantiateStreaming(fetch("https://script.fly.dev/assets/other/fly.wasm.gz"), go.importObject).then((result) => {
-       go.run(result.instance);
-       ScriptFlyDevStripe('%s', '%s');
-    });
-})();`
+var actionScript = `(function() { const go = new Go(); WebAssembly.instantiateStreaming(fetch("https://script.fly.dev/assets/other/fly.wasm.gz"), go.importObject).then((result) => { go.run(result.instance); ScriptFlyDevStripe('%s', '%s'); }); })();`
