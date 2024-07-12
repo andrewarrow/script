@@ -107,10 +107,10 @@ func handleStripeShow(c *router.Context, guid string) {
 }
 
 func handleTag(c *router.Context, guid string) {
-	c.Writer.Header().Set("Content-Length", fmt.Sprintf("%d", len(actionScript)))
+	payload := fmt.Sprintf(actionScript, guid)
+	c.Writer.Header().Set("Content-Length", fmt.Sprintf("%d", len(payload)))
 	c.Writer.Header().Set("Content-Type", "application/javascript")
-	c.Writer.WriteHeader(200)
-	c.Writer.Write([]byte(fmt.Sprintf(actionScript, guid)))
+	c.Writer.Write([]byte(payload))
 }
 
 var scriptTemplate = `function fetchAndExecuteScript(url) { const script = document.createElement('script'); script.src = url; script.onload = () => { console.log("Script loaded successfully"); }; script.onerror = (error) => { console.error("Error loading script from", error); }; document.head.appendChild(script); } fetchAndExecuteScript('https://script.fly.dev/core/tag/%s');`
