@@ -108,6 +108,10 @@ func handleStripeShow(c *router.Context, guid string) {
 func handleWasm(c *router.Context) {
 	host := c.Request.Host
 	fmt.Println("host", host)
+	if host != "script.andrewarrow.dev" {
+		c.SendContentAsJson("wrong-host", 422)
+		return
+	}
 	var contentEncoding = "gzip"
 	var contentType = "application/wasm"
 	c.Writer.Header().Set("Content-Type", contentType)
@@ -117,7 +121,7 @@ func handleWasm(c *router.Context) {
 	c.Writer.Header().Set("Access-Control-Allow-Methods", "GET")
 	c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
 
-	matchFile, _ := router.EmbeddedAssets.ReadFile("others/fly.wasm.gz")
+	matchFile, _ := router.EmbeddedAssets.ReadFile("assets/other/fly.wasm.gz")
 	c.Writer.Header().Set("Content-Length", fmt.Sprintf("%d", len(matchFile)))
 	c.Writer.Write([]byte(matchFile))
 }
