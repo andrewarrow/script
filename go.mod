@@ -4,7 +4,7 @@ module script
 
 go 1.21.0
 
-require github.com/andrewarrow/feedback v0.0.0-20240707133140-a098673d3e3a
+require github.com/andrewarrow/feedback v0.0.0-20240712012406-3886d4afbd67
 
 require (
 	cloud.google.com/go v0.112.0 // indirect

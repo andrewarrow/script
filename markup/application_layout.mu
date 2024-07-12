@@ -30,10 +30,6 @@ html data-theme=sunset
         div grid-flow-col gap-4 md:place-self-center md:justify-self-end
           a href=https://andrewarrow.dev/ link link-hover
             About Us
-          a href=https://andrewarrow.dev/ link link-hover
-            Pricing
-          a href=https://andrewarrow.dev/ link link-hover
-            Terms & Conditions
-          a href=https://andrewarrow.dev/ link link-hover
-            Privacy Policy
+          a href=https://github.com/andrewarrow/script link link-hover
+            Open Source
     {{ index . "wasm" }}
