@@ -13,3 +13,5 @@ div p-0
           input type=text input input-primary id=dev_secret_key
         div
           input id=save type=submit value=Save btn btn-primary btn-sm mt-3
+    div w-full md:w-1/2
+      {{ .items }}

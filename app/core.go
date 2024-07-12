@@ -76,9 +76,13 @@ func handleAboutUs(c *router.Context) {
 }
 func handleStart(c *router.Context) {
 	send := map[string]any{}
+	items := c.All("stripe", "where user_id=$1", "", c.User["id"])
+	send["items"] = items
 	c.SendContentInLayout("start.html", send, 200)
 }
 func handleStripePost(c *router.Context) {
+	c.ReadJsonBodyIntoParams()
+	c.ValidateAndInsert("stripe")
 	send := map[string]any{}
 	c.SendContentAsJson(send, 200)
 }

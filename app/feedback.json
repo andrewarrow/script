@@ -72,6 +72,24 @@
       ]
     },
     {
+      "name": "stripe",
+      "fields": [
+        {
+          "name": "dev_publishable_key",
+          "flavor": "name"
+        },
+        {
+          "name": "dev_secret_key",
+          "flavor": "name"
+        },
+        {
+          "name": "user_id",
+          "flavor": "int",
+          "index": "yes"
+        }
+      ]
+    },
+    {
       "name": "cookie_token",
       "fields": [
         {
