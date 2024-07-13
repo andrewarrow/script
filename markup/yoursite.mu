@@ -12,25 +12,27 @@ div p-0
           Get your site on this site!
         div mt-9
           It's like product hunt, just add a little javascript badge: 
-        div mt-6 
-          div bg-gray-100 rounded-lg w-64 text-sm
-            div p-2 flex space-x-3 items-center
-              div
-                a href=/
-                  img src=logo.png w-12
-              div space-y-1 text-center w-full
-                div text-gray-900
-                  listed on script.fly.dev 
-                div text-gray-900 font-mono
-                  rank #5
-        div mt-6
-          div bg-grey-900 rounded-lg w-64 text-sm border
-            div p-2 flex space-x-3 items-center
-              div
-                a href=/
-                  img src=logo.png w-12
-              div space-y-1 text-center w-full
-                div 
-                  listed on script.fly.dev 
-                div text-gray-100 font-mono 
-                  rank #5
+        div flex justify-center
+          div
+            div mt-6 
+              div bg-gray-100 rounded-lg w-64 text-sm
+                div p-2 flex space-x-3 items-center
+                  div
+                    a href=/
+                      img src=logo.png w-12
+                  div space-y-1 text-center w-full
+                    div text-gray-900
+                      listed on script.fly.dev 
+                    div text-gray-900 font-mono
+                      rank #5
+            div mt-6
+              div bg-grey-900 rounded-lg w-64 text-sm border
+                div p-2 flex space-x-3 items-center
+                  div
+                    a href=/
+                      img src=logo.png w-12
+                  div space-y-1 text-center w-full
+                    div 
+                      listed on script.fly.dev 
+                    div text-gray-100 font-mono 
+                      rank #5
