@@ -23,7 +23,7 @@ html data-theme=sunset
       {{ index . "flash" }}
     div overflow-x-auto pl-3 pr-3 min-h-screen font-montserrat text-base
       {{ index . "content" }}
-    div 
+    div mt-32
       div pb-32 footer items-center p-10 bg-base-200 text-base-content rounded
         div items-center grid-flow-col
           Copyright &copy; 2024 - All right reserved by andrewarrow.dev
