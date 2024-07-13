@@ -7,6 +7,10 @@ import (
 )
 
 func Core(c *router.Context, second, third string) {
+	if second == "yoursite" && third == "" && c.Method == "GET" {
+		handleYoursite(c)
+		return
+	}
 	if second == "start" && third == "" && c.Method == "GET" {
 		handleStart(c)
 		return
@@ -95,6 +99,10 @@ func handleTerms(c *router.Context) {
 func handleAboutUs(c *router.Context) {
 	send := map[string]any{}
 	c.SendContentInLayout("about_us.html", send, 200)
+}
+func handleYoursite(c *router.Context) {
+	send := map[string]any{}
+	c.SendContentInLayout("yoursite.html", send, 200)
 }
 func handleStart(c *router.Context) {
 	send := map[string]any{}
