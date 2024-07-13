@@ -6,9 +6,8 @@ div p-0
         div mt-9 text-white
           script.fly.dev
         div flex flex-wrap 
-          div bg-r w-32 h-32 rounded-full flex justify-center items-center
-            div bg-r w-16 h-16 rounded-full 
-              <svg width="200" height="200" viewBox="0 0 200 200"> <defs> <path id="circlePath" d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0" /> </defs> <text font-size="20" fill="black"> <textPath href="#circlePath"> Your text goes here </textPath> </text> </svg>
+          <svg class="" width="200" height="200" viewBox="0 0 200 200"> <defs> <path id="circlePath" d="M 100, 100 m -50, 0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" /> </defs> <text font-size="20" fill="white"> <textPath href="#circlePath"> homeducky.com </textPath> </text> </svg>
+          <svg class="" width="200" height="200" viewBox="0 0 200 200"> <defs> <path id="circlePath" d="M 100, 100 m -50, 0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" /> </defs> <text font-size="20" fill="white"> <textPath href="#circlePath"> g-n-r.fly.dev </textPath> </text> </svg>
           div bg-r w-32 h-32 rounded-full flex justify-center items-center
             div bg-r w-16 h-16 rounded-full 
           div bg-r w-32 h-32 rounded-full flex justify-center items-center
