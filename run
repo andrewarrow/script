@@ -7,7 +7,7 @@ cp main.go save_main
 cp wasm/main.go .
 GOOS=js GOARCH=wasm go build -ldflags="-s -w -X main.useLive=true" -o assets/other/json.wasm 
 cp wasm/script.go main.go
-GOOS=js GOARCH=wasm go build -ldflags="-s -w -X main.useLive=true" -o assets/other/fly.wasm 
+GOOS=js GOARCH=wasm go build -ldflags="-s -w -X main.useLive=false" -o assets/other/fly.wasm 
 if [ $? -eq 0 ]; then
     mv save_main main.go
     cd assets/other
