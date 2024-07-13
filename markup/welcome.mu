@@ -6,11 +6,16 @@ div p-0
         div mt-9 text-white
           script.fly.dev
         div flex flex-wrap 
-          div bg-r w-32 h-32 rounded-full
-          div bg-r w-32 h-32 rounded-full
-          div bg-r w-32 h-32 rounded-full
-          div bg-r w-32 h-32 rounded-full
-          div bg-r w-32 h-32 rounded-full
+          div bg-r w-32 h-32 rounded-full flex justify-center items-center
+            div bg-r w-16 h-16 rounded-full 
+          div bg-r w-32 h-32 rounded-full flex justify-center items-center
+            div bg-r w-16 h-16 rounded-full 
+          div bg-r w-32 h-32 rounded-full flex justify-center items-center
+            div bg-r w-16 h-16 rounded-full 
+          div bg-r w-32 h-32 rounded-full flex justify-center items-center
+            div bg-r w-16 h-16 rounded-full 
+          div bg-r w-32 h-32 rounded-full flex justify-center items-center
+            div bg-r w-16 h-16 rounded-full 
         div mb-96
         div mt-9
           div mt-3 text-center
