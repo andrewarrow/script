@@ -15,7 +15,7 @@ div p-0
         div flex justify-center
           div
             div mt-6 
-              a block href=/ bg-gray-100 rounded-lg w-64 text-sm
+              a block href=/ bg-gray-100 rounded-lg w-64 text-sm border border-blue-600
                 div p-2 flex space-x-3 items-center
                   div
                     img src=logo.png w-12
@@ -25,7 +25,7 @@ div p-0
                     div text-gray-900 font-mono
                       rank #5
             div mt-6
-              a block href=/ bg-grey-900 rounded-lg w-64 text-sm border
+              a block href=/ bg-grey-900 rounded-lg w-64 text-sm border border-red-600
                 div p-2 flex space-x-3 items-center
                   div
                     img src=logo.png w-12
