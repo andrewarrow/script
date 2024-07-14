@@ -1,6 +1,6 @@
 {{ define "widget_us_light" }}
   div mt-6 
-    a block href=/ bg-gray-100 rounded-lg w-64 text-sm border border-blue-600
+    a block href=https://script.fly.dev/core/yoursite bg-gray-100 rounded-lg w-64 text-sm border border-blue-600
       div p-2 flex space-x-3 items-center
         div
           img src=logo.png w-12
