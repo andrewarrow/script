@@ -50,7 +50,7 @@ func Core(c *router.Context, second, third string) {
 	if second == "register" && third == "" && c.Method == "POST" {
 		host := c.Request.Host
 		fmt.Println("host", host)
-		if host == "script.andrewarrow.dev" {
+		if host == "script.fly.dev" {
 			c.SendContentAsJson("wrong-host", 422)
 			return
 		}
@@ -60,7 +60,7 @@ func Core(c *router.Context, second, third string) {
 	if second == "login" && third == "" && c.Method == "POST" {
 		host := c.Request.Host
 		fmt.Println("host", host)
-		if host == "script.andrewarrow.dev" {
+		if host == "script.fly.dev" {
 			c.SendContentAsJson("wrong-host", 422)
 			return
 		}
@@ -128,7 +128,7 @@ func handleStripeShow(c *router.Context, guid string) {
 func handleWasm(c *router.Context) {
 	host := c.Request.Host
 	fmt.Println("host", host)
-	if host != "script.andrewarrow.dev" && host != "localhost:3000" {
+	if host != "script.fly.dev" && host != "localhost:3000" {
 		c.SendContentAsJson("wrong-host", 422)
 		return
 	}
