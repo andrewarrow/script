@@ -2,7 +2,7 @@ package browser
 
 import "github.com/andrewarrow/feedback/wasm"
 
-var base = "https://fly.script.dev"
+var base = "https://script.fly.dev"
 
 //var base = "http://localhost:3001"
 
