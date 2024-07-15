@@ -11,7 +11,7 @@
           a href=/ id=logout
             Logout
         {{ else }}
-          a href=/core/login link link-hover
-            Login
+          a href=/core/yoursite link link-hover
+            Add Your Site
         {{ end }}
   {{ end }}

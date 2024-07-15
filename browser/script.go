@@ -2,8 +2,9 @@ package browser
 
 import "github.com/andrewarrow/feedback/wasm"
 
-// var base = "https://fly.script.dev"
-var base = "http://localhost:3001"
+var base = "https://fly.script.dev"
+
+//var base = "http://localhost:3001"
 
 func RunScriptForFly() {
 	//guid := Global.Start

@@ -34,3 +34,10 @@ div p-0
                       listed on script.fly.dev 
                     div text-gray-100 font-mono 
                       rank #5
+        div mt-9
+          Use this javascript for dark themes:
+        div flex justify-center
+          div w-full md:w-1/2 mt-9 font-mono text-sm
+            {{.script}}
+        div mt-9
+          Use this javascript for light themes:
