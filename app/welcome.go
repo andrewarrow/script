@@ -19,5 +19,7 @@ func handleWelcomeIndex(c *router.Context) {
 	}
 
 	send := map[string]any{}
+	items := c.All("domain", "order by created_at desc", "")
+	send["items"] = items
 	c.SendContentInLayout("welcome.html", send, 200)
 }

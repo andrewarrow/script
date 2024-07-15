@@ -6,14 +6,10 @@ div p-0
         div mt-9 text-white font-mono
           script.fly.dev
         div flex flex-wrap mt-3 justify-center
-          a href=https://homeducky.com
-            <svg class="" width="200" height="200" viewBox="0 0 200 200"> <defs> <path id="circlePath" d="M 100, 100 m -50, 0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" /> </defs> <text font-size="20" fill="gold"> <textPath href="#circlePath"> homeducky.com </textPath> </text> </svg>
-          a href=https://g-n-r.fly.dev
-            <svg class="" width="200" height="200" viewBox="0 0 200 200"> <defs> <path id="circlePath" d="M 100, 100 m -50, 0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" /> </defs> <text font-size="20" fill="gold"> <textPath href="#circlePath"> g-n-r.fly.dev </textPath> </text> </svg>
-          a href=https://webscale.fly.dev
-            <svg class="" width="200" height="200" viewBox="0 0 200 200"> <defs> <path id="circlePath" d="M 100, 100 m -50, 0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" /> </defs> <text font-size="20" fill="gold"> <textPath href="#circlePath"> webscale.fly.dev </textPath> </text> </svg>
-          a href=/core/yoursite
-            <svg class="" width="200" height="200" viewBox="0 0 200 200"> <defs> <path id="circlePath" d="M 100, 100 m -50, 0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" /> </defs> <text font-size="20" fill="gray"> <textPath href="#circlePath"> yoursite-here.fly.dev </textPath> </text> </svg>
+          {{ range $i, $item := .items }}
+            a href=https://{{$item}}
+              <svg class="" width="200" height="200" viewBox="0 0 200 200"> <defs> <path id="circlePath" d="M 100, 100 m -50, 0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" /> </defs> <text font-size="20" fill="gold"> <textPath href="#circlePath"> {{$item}} </textPath> </text> </svg>
+          {{ end }}
         div mb-96
         div mt-9
           div mt-3 text-center

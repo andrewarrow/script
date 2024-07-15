@@ -2,11 +2,16 @@ package app
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/andrewarrow/feedback/router"
 )
 
 func Core(c *router.Context, second, third string) {
+	if second == "install" && third == "" && c.Method == "POST" {
+		handleInstallHref(c)
+		return
+	}
 	if second == "yoursite" && third == "" && c.Method == "GET" {
 		handleYoursite(c)
 		return
@@ -125,6 +130,20 @@ func handleStripeShow(c *router.Context, guid string) {
 	send["script"] = fmt.Sprintf(`<script type="text/javascript">%s</script>`, script)
 	c.SendContentInLayout("stripe.html", send, 200)
 }
+
+func handleInstallHref(c *router.Context) {
+	c.ReadJsonBodyIntoParams()
+	href, _ := c.Params["href"].(string)
+	if strings.HasPrefix(href, "http://") {
+		href = href[8:]
+	} else if strings.HasPrefix(href, "https://") {
+		href = href[9:]
+	}
+	tokens := strings.Split(href, "/")
+	c.Params["domain"] := tokens[0]
+	c.SendContentAsJson("", 200)
+}
+
 func handleWasm(c *router.Context) {
 	host := c.Request.Host
 	fmt.Println("host", host)

@@ -90,6 +90,21 @@
       ]
     },
     {
+      "name": "domain",
+      "fields": [
+        {
+          "name": "domain",
+          "flavor": "name",
+          "index": "unique"
+        },
+        {
+          "name": "user_id",
+          "flavor": "int",
+          "index": "yes"
+        }
+      ]
+    },
+    {
       "name": "cookie_token",
       "fields": [
         {
