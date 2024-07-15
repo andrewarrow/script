@@ -140,8 +140,15 @@ func handleInstallHref(c *router.Context) {
 		href = href[9:]
 	}
 	tokens := strings.Split(href, "/")
-	c.Params["domain"] := tokens[0]
+	c.Params["domain"] = tokens[0]
+	setCors(c)
 	c.SendContentAsJson("", 200)
+}
+
+func setCors(c *router.Context) {
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+	c.Writer.Header().Set("Access-Control-Allow-Methods", "GET")
+	c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
 }
 
 func handleWasm(c *router.Context) {
@@ -156,9 +163,7 @@ func handleWasm(c *router.Context) {
 	c.Writer.Header().Set("Content-Type", contentType)
 	c.Writer.Header().Set("Connection", "keep-alive")
 	c.Writer.Header().Set("Content-Encoding", contentEncoding)
-	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-	c.Writer.Header().Set("Access-Control-Allow-Methods", "GET")
-	c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
+	setCors(c)
 
 	matchFile, _ := router.EmbeddedAssets.ReadFile("assets/other/fly.wasm.gz")
 	c.Writer.Header().Set("Content-Length", fmt.Sprintf("%d", len(matchFile)))
