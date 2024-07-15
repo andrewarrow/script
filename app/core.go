@@ -156,7 +156,7 @@ func handleInstallHrefOptions(c *router.Context) {
 func handleWasm(c *router.Context) {
 	host := c.Request.Host
 	fmt.Println("host", host)
-	if host != "script.fly.dev" && host != "localhost:3000" {
+	if host != "script.fly.dev" && host != "localhost:3001" {
 		c.SendContentAsJson("wrong-host", 422)
 		return
 	}
