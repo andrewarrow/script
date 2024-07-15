@@ -14,5 +14,9 @@ func RunScriptForFly() {
 	go wasm.DoPost(base+"/core/install", m)
 
 	parent := Document.Id("fly2024").JValue.Get("parentElement")
-	parent.Set("innerHTML", Document.Render("widget_us_dark", m))
+	theme := "widget_us_dark"
+	if Global.Start == "light" {
+		theme = "widget_us_light"
+	}
+	parent.Set("innerHTML", Document.Render(theme, m))
 }
