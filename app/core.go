@@ -8,6 +8,10 @@ import (
 )
 
 func Core(c *router.Context, second, third string) {
+	if second == "install" && third == "" && c.Method == "OPTIONS" {
+		handleInstallHrefOptions(c)
+		return
+	}
 	if second == "install" && third == "" && c.Method == "POST" {
 		handleInstallHref(c)
 		return
@@ -141,14 +145,11 @@ func handleInstallHref(c *router.Context) {
 	}
 	tokens := strings.Split(href, "/")
 	c.Params["domain"] = tokens[0]
-	setCors(c)
+	router.SetCors(c)
 	c.SendContentAsJson("", 200)
 }
-
-func setCors(c *router.Context) {
-	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-	c.Writer.Header().Set("Access-Control-Allow-Methods", "GET")
-	c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
+func handleInstallHrefOptions(c *router.Context) {
+	router.SetCorsOptions(c)
 }
 
 func handleWasm(c *router.Context) {
@@ -163,7 +164,7 @@ func handleWasm(c *router.Context) {
 	c.Writer.Header().Set("Content-Type", contentType)
 	c.Writer.Header().Set("Connection", "keep-alive")
 	c.Writer.Header().Set("Content-Encoding", contentEncoding)
-	setCors(c)
+	router.SetCors(c)
 
 	matchFile, _ := router.EmbeddedAssets.ReadFile("assets/other/fly.wasm.gz")
 	c.Writer.Header().Set("Content-Length", fmt.Sprintf("%d", len(matchFile)))
