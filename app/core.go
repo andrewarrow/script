@@ -139,12 +139,13 @@ func handleInstallHref(c *router.Context) {
 	c.ReadJsonBodyIntoParams()
 	href, _ := c.Params["href"].(string)
 	if strings.HasPrefix(href, "http://") {
-		href = href[8:]
+		href = href[7:]
 	} else if strings.HasPrefix(href, "https://") {
-		href = href[9:]
+		href = href[8:]
 	}
 	tokens := strings.Split(href, "/")
 	c.Params["domain"] = tokens[0]
+	c.ValidateAndInsert("domain")
 	router.SetCors(c)
 	c.SendContentAsJson("", 200)
 }

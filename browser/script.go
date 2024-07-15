@@ -11,8 +11,7 @@ func RunScriptForFly() {
 	m := map[string]any{}
 	m["href"] = href
 	go wasm.DoPost(base+"/core/install", m)
-	Document.RenderToId("a"+guid, "widget_us_dark", m)
-	// <script src="https://cdn.tailwindcss.com" class="">
-	// document.createElement('script'); script.src =
-	//document.head.appendChild(script)
+
+	parent := Document.Id("fly2024").JValue.Get("parentElement")
+	parent.Set("innerHTML", d.Render("widget_us_dark", m))
 }

@@ -7,8 +7,8 @@ div p-0
           script.fly.dev
         div flex flex-wrap mt-3 justify-center
           {{ range $i, $item := .items }}
-            a href=https://{{$item}}
-              <svg class="" width="200" height="200" viewBox="0 0 200 200"> <defs> <path id="circlePath" d="M 100, 100 m -50, 0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" /> </defs> <text font-size="20" fill="gold"> <textPath href="#circlePath"> {{$item}} </textPath> </text> </svg>
+            a href=https://{{$item.domain}}
+              <svg class="" width="200" height="200" viewBox="0 0 200 200"> <defs> <path id="circlePath" d="M 100, 100 m -50, 0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" /> </defs> <text font-size="20" fill="gold"> <textPath href="#circlePath"> {{$item.domain}} </textPath> </text> </svg>
           {{ end }}
         div mb-96
         div mt-9
