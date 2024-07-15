@@ -38,6 +38,9 @@ div p-0
           Use this javascript for dark themes:
         div flex justify-center
           div w-full md:w-1/2 mt-9 font-mono text-sm
-            {{.script}}
-        div mt-9
+            {{.light_script}}
+        div mt-9 data-theme=light
           Use this javascript for light themes:
+        div flex justify-center data-theme=light
+          div w-full md:w-1/2 mt-9 font-mono text-sm
+            {{.dark_script}}

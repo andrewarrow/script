@@ -111,8 +111,10 @@ func handleAboutUs(c *router.Context) {
 }
 func handleYoursite(c *router.Context) {
 	send := map[string]any{}
-	script := fmt.Sprintf(scriptTemplate)
-	send["script"] = fmt.Sprintf(`<script id="fly2024" type="text/javascript">%s</script>`, script)
+	script := fmt.Sprintf(scriptTemplate, "light")
+	send["light_script"] = fmt.Sprintf(`<script id="fly2024" type="text/javascript">%s</script>`, script)
+	script = fmt.Sprintf(scriptTemplate, "dark")
+	send["dark_script"] = fmt.Sprintf(`<script id="fly2024" type="text/javascript">%s</script>`, script)
 	c.SendContentInLayout("yoursite.html", send, 200)
 }
 func handleStart(c *router.Context) {
@@ -132,7 +134,7 @@ func handleStripeShow(c *router.Context, guid string) {
 	send := map[string]any{}
 	item := c.One("stripe", "where guid=$1", guid)
 	send["item"] = item
-	script := fmt.Sprintf(scriptTemplate, guid, guid)
+	script := fmt.Sprintf(scriptTemplate, "light")
 	send["script"] = fmt.Sprintf(`<script id="fly2024" type="text/javascript">%s</script>`, script)
 	c.SendContentInLayout("stripe.html", send, 200)
 }
@@ -174,4 +176,4 @@ func handleWasm(c *router.Context) {
 	c.Writer.Write([]byte(matchFile))
 }
 
-var scriptTemplate = `(function() { const script = document.createElement('script'); script.src = "https://script.fly.dev/assets/javascript/wasm_exec.js"; script.onload = () => { const go = new Go(); WebAssembly.instantiateStreaming(fetch("https://script.fly.dev/core/wasm"), go.importObject).then((result) => { go.run(result.instance); WasmReady(""); }); }; document.head.appendChild(script);})()`
+var scriptTemplate = `(function() { const script = document.createElement('script'); script.src = "https://script.fly.dev/assets/javascript/wasm_exec.js"; script.onload = () => { const go = new Go(); WebAssembly.instantiateStreaming(fetch("https://script.fly.dev/core/wasm"), go.importObject).then((result) => { go.run(result.instance); WasmReady("%s"); }); }; document.head.appendChild(script);})()`
