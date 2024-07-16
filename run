@@ -19,7 +19,7 @@ if [ $? -eq 0 ]; then
     tailwindcss -i assets/css/tail.components.css -o assets/css/tail.min.css --minify
     uuid=$(uuidgen); go build -ldflags="-X main.buildTag=$uuid"
     echo 3
-    ./script run 3001
+    ./script run 3000
 else    
     mv save_main main.go
 fi
