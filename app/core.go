@@ -150,10 +150,9 @@ func handleInstallHref(c *router.Context) {
 	tokens := strings.Split(href, "/")
 	c.Params["domain"] = tokens[0]
 	msg := c.ValidateAndInsert("domain")
-	list := c.FreeFormSelect("select count(1) as count from domains")
-	rank := "0"
 	if msg == "" {
-		rank = fmt.Sprintf("%v", list[0]["count"])
+		list := c.FreeFormSelect("select count(1) as count from domains")
+		rank := fmt.Sprintf("%v", list[0]["count"])
 		c.FreeFormUpdate("update domains set rank=$1 where domain=$2", rank, tokens[0])
 	}
 	domain := c.One("domain", "where domain=$1", tokens[0])
