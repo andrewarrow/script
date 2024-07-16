@@ -16,11 +16,11 @@ div p-0
             div
               Already have account?
             div
-              a btn btn-sm btn-primary href=/core/login
+              a btn btn-sm btn-primary href=https://script.andrewarrow.dev/core/login
                 Login
           div mt-3 
             div
               Need an account?
             div
-              a btn btn-sm btn-secondary href=/core/register
+              a btn btn-sm btn-secondary href=https://script.andrewarrow.dev/core/register
                 Register
