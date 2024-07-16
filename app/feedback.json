@@ -98,6 +98,11 @@
           "index": "unique"
         },
         {
+          "name": "rank",
+          "flavor": "int",
+          "index": "yes"
+        },
+        {
           "name": "user_id",
           "flavor": "int",
           "index": "yes"

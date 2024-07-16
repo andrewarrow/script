@@ -149,9 +149,16 @@ func handleInstallHref(c *router.Context) {
 	}
 	tokens := strings.Split(href, "/")
 	c.Params["domain"] = tokens[0]
-	c.ValidateAndInsert("domain")
+	msg := c.ValidateAndInsert("domain")
+	list := c.FreeFormSelect("select count(1) as count from domains")
+	rank := "0"
+	if msg == "" {
+		rank = fmt.Sprintf("%v", list[0]["count"])
+		c.FreeFormUpdate("update domains set rank=$1 where domain=$2", rank, tokens[0])
+	}
+	domain := c.One("domain", "where domain=$1", tokens[0])
 	router.SetCors(c)
-	c.SendContentAsJson("", 200)
+	c.SendContentAsJson(fmt.Sprintf("%v", domain["rank"]), 200)
 }
 func handleInstallHrefOptions(c *router.Context) {
 	router.SetCorsOptions(c)

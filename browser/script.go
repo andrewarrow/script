@@ -11,12 +11,14 @@ func RunScriptForFly() {
 	href := Global.Location.Href
 	m := map[string]any{}
 	m["href"] = href
-	go wasm.DoPost(base+"/core/install", m)
-
-	parent := Document.Id("fly2024").JValue.Get("parentElement")
-	theme := "widget_us_dark"
-	if Global.Start == "light" {
-		theme = "widget_us_light"
-	}
-	parent.Set("innerHTML", Document.Render(theme, m))
+	go func() {
+		js, _ := wasm.DoPost(base+"/core/install", m)
+		parent := Document.Id("fly2024").JValue.Get("parentElement")
+		theme := "widget_us_dark"
+		if Global.Start == "light" {
+			theme = "widget_us_light"
+		}
+		m["rank"] = js
+		parent.Set("innerHTML", Document.Render(theme, m))
+	}()
 }
